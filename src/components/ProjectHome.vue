@@ -15,7 +15,7 @@
                 <div id="collapse_desc" class="collapse" :class="{show: isShowProjectDescription}" :key="isShowProjectDescription">
                     <div class="form-group">
                         <div class="md-field md-field--modify-label md-theme-default md-has-placeholder md-has-textarea">
-                            <textarea id="md-textarea-b6felq2dr" placeholder="Project Description" maxlength="500" class="md-textarea md-scrollbar" style="resize: none;" v-model="projectDescription" @focusin="addFocusClass" @focusout="removeFocusClass"></textarea>
+                            <textarea id="md-textarea-b6felq2dr" placeholder="Project Description" maxlength="500" class="md-textarea md-scrollbar" style="resize: none;" v-model="projectDescription" @focusin="addFocusClass" @focusout="removeFocusClass" @keyup="hasValue"></textarea>
                             <span class="md-error"></span>
                             <span class="md-count"> {{countProjectDescription}} / 500 </span>
                         </div>
@@ -81,6 +81,13 @@ export default {
     clickWindow: function (event) {
       if (!event.target.closest('.create-project-home')) {
         this.hideProjectDescription()
+      }
+    },
+    hasValue: function (event) {
+      if (event.target.value) {
+        event.target.parentElement.classList.add('md-has-value')
+      } else {
+        event.target.parentElement.classList.remove('md-has-value')
       }
     }
   },
